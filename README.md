@@ -31,7 +31,6 @@ Even though the U-Net has a larger receptive field, meaning each output pixel ca
 
 ![ResNet_base vs UNet_base](readme_imgs/ResNet_base_vs_UNet_base.png)
 
-
 ---
 
 ## Other Design Choices
@@ -41,12 +40,19 @@ Predicting coordinates directly turns localization into a single regression prob
 
 ### Batch Normalization
 Batch normalization stabilizes training by normalizing layer activations within each mini-batch, addressing **internal covariate shift**, the changing distribution of layer inputs during training. It improves gradient flow, allows higher learning rates, and acts as a regularizer. Its effectiveness depends on batch size: very small batches can make statistics noisy.
+Adding batch normalization seems to have a slight positive effect, especially on the U-Net. BN helps networks more when there’s high variation in layer inputs, which happens more in U-Net (due to concatenations and deep encoder-decoder structure) than in ResNet (with residual connections smoothing the flow of information).
+
+![Batch norm](readme_imgs/Batch_norm.png)
+
 
 ### Final Layer Activation Functions
 - **Sigmoid** maps each output independently to [0,1], suitable for multi-label or independent pixel predictions.  
 - **Softmax** converts a vector of values into a probability distribution that sums to 1, emphasizing a single high-probability location per keypoint channel.  
 
 In keypoint heatmaps, sigmoid allows multiple high-probability regions, while softmax emphasizes a single peak.
+
+Applying sigmoid alone pushes the network to predict 0 for all pixels.
+![Sigmoid](readme_imgs/Sigmoid.png)
 
 ### Optimizers
 Various optimizers (e.g., Adam, RMSProp) are tested to study their effect on convergence speed and final accuracy.
