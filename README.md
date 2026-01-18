@@ -1,19 +1,19 @@
 # Keypoint-Networks
 
 ## Introduction
-Neural networks are commonly used in Formula Student to detect cone keypoints for improved distance estimation (see: [RektNet paper](https://arxiv.org/abs/2007.13971)).
+Neural networks are commonly used in Formula Student to detect cone keypoints for improved distance estimation (see: [RektNet](https://arxiv.org/abs/2007.13971)).
 
-This repository explores lightweight neural network architectures for keypoint heatmap prediction. I systematically evaluate the impact of design choices, including network architecture, optimizers, learning rates, batch size, normalization strategies, and output activations, while keeping models small enough for real-time embedded systems (~80 KB memory footprint).
+This repository explores **lightweight neural network architectures** for keypoint heatmap prediction. I systematically evaluate the impact of design choices such as network architecture, optimizer, learning rate, batch size, normalization strategies, and output activations. All models are constrained to a **~80 KB memory footprint**, making them suitable for real-time embedded systems and enabling fair comparisons.
 
 ---
 
 ## Training Data
-The models are trained on a subset of the **FSOCO dataset**, containing ~4k images of Formula Student cones. Images were resized to 64×48 pixels and annotated with 7 keypoints per cone using **Supervisely**.
+The models are trained on a subset of the **FSOCO dataset**, consisting of approximately 4,000 images of Formula Student cones. Images were resized to **64×48 pixels** and annotated with **7 keypoints per cone** using **Supervisely**.
 
-Rather than predicting keypoint coordinates directly, the network predicts **heatmaps** for each keypoint. Direct coordinate regression is unstable because small errors can lead to large jumps in output and weak gradient signals. It can also fail in out-of-distribution cases: when multiple locations are plausible, regression often predicts their average, producing meaningless points.
+Instead of predicting keypoint coordinates directly, the network predicts **heatmaps** for each keypoint. Direct coordinate regression is often unstable: small prediction errors can result in large coordinate jumps and weak gradient signals. It also performs poorly in out-of-distribution scenarios—when multiple locations are plausible, a regression model may output their average, producing meaningless predictions.
 
-To address this, **Gaussian heatmaps** are used as targets:
-- They provide smoother, more informative supervision than single-pixel labels.
+To address these issues, **Gaussian heatmaps** are used as training targets:
+- They provide smoother and more informative supervision than single-pixel labels.
 - They make training more tolerant to small localization errors and labeling noise, which is common in low-resolution or blurry images.
 
 ---
@@ -21,50 +21,75 @@ To address this, **Gaussian heatmaps** are used as targets:
 ## Architectures
 
 ### ResNet
-**ResNet (Residual Network)** is a convolutional architecture with skip (residual) connections. Each block adds its input to the output, allowing layers to learn residual functions. This improves gradient flow, reduces training instability, and enables deeper networks to train effectively. Even in small, lightweight models, ResNet helps the network learn meaningful features efficiently.
+**ResNet (Residual Network)** is a convolutional architecture that introduces skip (residual) connections, allowing each block to learn a residual function instead of a direct mapping. These connections improve gradient flow, reduce training instability, and enable deeper networks to train effectively. Even in compact, lightweight models, ResNet helps extract meaningful features efficiently.
 
 ### U-Net
-**U-Net** is an encoder–decoder architecture for dense, pixel-wise predictions. The encoder captures semantic context through downsampling, while the decoder restores spatial resolution. Skip connections pass fine-grained details from the encoder to the decoder, allowing the network to localize features accurately while maintaining global context. This makes U-Net especially effective for segmentation and keypoint heatmap prediction.
+**U-Net** is an encoder–decoder architecture designed for dense, pixel-wise prediction tasks. The encoder captures semantic context through downsampling, while the decoder restores spatial resolution. Skip connections pass fine-grained spatial details from the encoder to the decoder, enabling precise localization while maintaining global context. This structure makes U-Net particularly effective for segmentation and keypoint heatmap prediction.
 
 ### Comparison
-Even though the U-Net has a larger receptive field, meaning each output pixel can “see” a bigger portion of the input image (about 30×30 pixels) compared to ResNet’s 15×15, ResNet performs better for this task. This shows that, for small images and lightweight models, having a very large receptive field is not always necessary. ResNet’s residual connections and efficient feature extraction allow it to learn keypoint locations more accurately despite its smaller receptive field.
+Although U-Net has a larger **receptive field**—meaning each output pixel can be influenced by a larger portion of the input image (approximately **30×30 pixels**)—compared to ResNet’s **15×15**, ResNet consistently performs better in this task. This suggests that, for small images and lightweight models, a very large receptive field is not always necessary. ResNet’s residual connections and efficient feature reuse allow it to localize keypoints more accurately despite its smaller receptive field.
 
-![ResNet_base vs UNet_base](readme_imgs/ResNet_base_vs_UNet_base.png)
+![ResNet vs U-Net](readme_imgs/ResNet_base_vs_UNet_base.png)
 
 ---
 
 ## Other Design Choices
 
 ### Heatmaps vs. Coordinate Regression
-Predicting coordinates directly turns localization into a single regression problem. Small spatial errors can cause large coordinate deviations, and the model may average multiple plausible points in ambiguous cases, resulting in meaningless predictions. Heatmap prediction preserves spatial structure, provides dense supervision, and allows multiple high-probability regions, making training more stable and robust. Gaussian heatmaps further improve stability by rewarding predictions that are close to the true keypoint, instead of penalizing small deviations heavily.
+Direct coordinate regression collapses localization into a single prediction per keypoint. This makes learning sensitive to small spatial errors and forces the model to output a single point even in ambiguous cases, often resulting in averaged, meaningless predictions. Heatmap-based approaches preserve spatial structure, provide dense supervision, and naturally allow multiple high-probability regions. Using Gaussian heatmaps further stabilizes training by rewarding predictions close to the ground truth rather than heavily penalizing small deviations.
+
+---
 
 ### Batch Normalization
-Batch normalization stabilizes training by normalizing layer activations within each mini-batch, addressing **internal covariate shift**, the changing distribution of layer inputs during training. It improves gradient flow, allows higher learning rates, and acts as a regularizer. Its effectiveness depends on batch size: very small batches can make statistics noisy.
-Adding batch normalization seems to have a slight positive effect, especially on the U-Net. BN helps networks more when there’s high variation in layer inputs, which happens more in U-Net (due to concatenations and deep encoder-decoder structure) than in ResNet (with residual connections smoothing the flow of information).
+Batch normalization stabilizes training by normalizing layer activations within each mini-batch, addressing **internal covariate shift**—the continuous change in activation distributions during training. It improves gradient flow, allows higher learning rates, and acts as a regularizer. Its effectiveness depends on batch size, as very small batches can produce noisy statistics.
 
-![Batch norm](readme_imgs/Batch_norm.png)
+In practice, batch normalization provides a **stronger benefit for U-Net than for ResNet**. U-Net’s encoder–decoder structure and concatenated skip connections introduce larger variations in activation scale, particularly in the decoder. Batch normalization helps align these distributions, leading to more stable training. In contrast, ResNet’s residual connections already stabilize activation scales, making it less sensitive to normalization.
 
+![Batch Normalization](readme_imgs/Batch_norm.png)
+
+---
 
 ### Final Layer Activation Functions
-- **Sigmoid** maps each output independently to [0,1], suitable for multi-label or independent pixel predictions.  
-- **Softmax** converts a vector of values into a probability distribution that sums to 1, emphasizing a single high-probability location per keypoint channel.  
+Two output activations are explored:
 
-In keypoint heatmaps, sigmoid allows multiple high-probability regions, while softmax emphasizes a single peak.
+- **Sigmoid** maps each output independently to the range [0, 1], allowing multiple high-probability regions per heatmap.
+- **Softmax** converts values into a probability distribution that sums to 1, emphasizing a single dominant peak per keypoint channel.
 
-Applying sigmoid alone pushes the network to predict 0 for all pixels.
-![Sigmoid](readme_imgs/Sigmoid.png)
+Applying sigmoid **without batch normalization** causes both architectures to collapse to near-zero predictions. This occurs because unnormalized activations can push logits into strongly negative values at initialization, causing sigmoid to saturate and gradients to vanish.
+
+Batch normalization prevents this by keeping activations near zero mean and unit variance, ensuring sigmoid operates in its high-gradient regime. With batch normalization enabled, U-Net combined with sigmoid outperforms all other configurations. U-Net benefits more from this combination because normalization mitigates scale mismatches introduced by encoder–decoder concatenations, whereas ResNet’s residual structure already provides inherent stabilization.
+
+![Sigmoid without BN](readme_imgs/Sigmoid.png)
+
+![Sigmoid with BN](readme_imgs/Sigmoid_batch_norm.png)
+
+Softmax also yields a noticeable performance improvement by enforcing a clear spatial probability distribution per keypoint.
+
+![Softmax](readme_imgs/Softmax.png)
+
+---
 
 ### Optimizers
-Various optimizers (e.g., Adam, RMSProp) are tested to study their effect on convergence speed and final accuracy.
+Multiple optimizers (e.g., Adam, RMSProp) are evaluated to study their impact on convergence speed and final accuracy under tight model size constraints.
+
+---
 
 ### Batch Size
-**Batch size** is the number of examples processed together per forward/backward pass. It affects training stability, convergence, and generalization:
+**Batch size** determines how many samples are processed per forward/backward pass and affects training stability, convergence, and generalization:
 
-- **Small batch sizes (4–16):**  
-  - Provide noisy gradient estimates, which can improve generalization.  
-  - Can make BatchNorm unstable due to limited statistics.  
-  - Require less memory, useful for lightweight models.  
+- **Small batch sizes (4–16):**
+  - Introduce noisy gradients that can improve generalization.
+  - Can destabilize BatchNorm due to limited statistics.
+  - Require less memory.
 
-- **Large batch sizes (32–128):**  
-  - Give more stable and accurate gradient estimates.  
-  - Require more memory and may sometimes reduce generalization if too large.
+- **Large batch sizes (32–128):**
+  - Produce smoother, more stable gradients.
+  - Require more memory and may reduce generalization if too large.
+
+Across a wide range of batch sizes and output activations (linear vs spatial softmax), performance differences were minimal. This indicates that the task is well-conditioned and that most configurations converge to similar solutions, with optimization choices primarily affecting training dynamics rather than final accuracy.
+
+Batch size = 4  
+![Batch size 4](readme_imgs/batch_4.png)
+
+Batch size = 64  
+![Batch size 64](readme_imgs/batch_64.png)
