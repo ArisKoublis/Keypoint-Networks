@@ -1,0 +1,160 @@
+{
+    "description": "",
+    "tags": [
+        {
+            "id": 131556534,
+            "tagId": 30434434,
+            "name": "bad quality",
+            "value": null,
+            "labelerLogin": "akoublis",
+            "createdAt": "2022-09-24T18:58:27.757Z",
+            "updatedAt": "2022-09-24T18:58:27.757Z"
+        }
+    ],
+    "size": {
+        "height": 64,
+        "width": 48
+    },
+    "objects": [
+        {
+            "id": 1037274925,
+            "classId": 10374581,
+            "description": "",
+            "geometryType": "point",
+            "labelerLogin": "akoublis",
+            "createdAt": "2022-09-24T18:58:17.270Z",
+            "updatedAt": "2022-09-24T18:58:17.270Z",
+            "tags": [],
+            "classTitle": "Top",
+            "points": {
+                "exterior": [
+                    [
+                        36,
+                        52
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "id": 1037274922,
+            "classId": 10374581,
+            "description": "",
+            "geometryType": "point",
+            "labelerLogin": "akoublis",
+            "createdAt": "2022-09-24T18:58:13.710Z",
+            "updatedAt": "2022-09-24T18:58:13.710Z",
+            "tags": [],
+            "classTitle": "Top",
+            "points": {
+                "exterior": [
+                    [
+                        32,
+                        35
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "id": 1037274921,
+            "classId": 10374581,
+            "description": "",
+            "geometryType": "point",
+            "labelerLogin": "akoublis",
+            "createdAt": "2022-09-24T18:58:10.529Z",
+            "updatedAt": "2022-09-24T18:58:10.529Z",
+            "tags": [],
+            "classTitle": "Top",
+            "points": {
+                "exterior": [
+                    [
+                        31,
+                        20
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "id": 1037274918,
+            "classId": 10374581,
+            "description": "",
+            "geometryType": "point",
+            "labelerLogin": "akoublis",
+            "createdAt": "2022-09-24T18:58:07.414Z",
+            "updatedAt": "2022-09-24T18:58:07.414Z",
+            "tags": [],
+            "classTitle": "Top",
+            "points": {
+                "exterior": [
+                    [
+                        25,
+                        5
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "id": 1037274916,
+            "classId": 10374581,
+            "description": "",
+            "geometryType": "point",
+            "labelerLogin": "akoublis",
+            "createdAt": "2022-09-24T18:58:03.751Z",
+            "updatedAt": "2022-09-24T18:58:03.751Z",
+            "tags": [],
+            "classTitle": "Top",
+            "points": {
+                "exterior": [
+                    [
+                        19,
+                        20
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "id": 1037274913,
+            "classId": 10374581,
+            "description": "",
+            "geometryType": "point",
+            "labelerLogin": "akoublis",
+            "createdAt": "2022-09-24T18:58:00.939Z",
+            "updatedAt": "2022-09-24T18:58:00.939Z",
+            "tags": [],
+            "classTitle": "Top",
+            "points": {
+                "exterior": [
+                    [
+                        17,
+                        35
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "id": 1037274910,
+            "classId": 10374581,
+            "description": "",
+            "geometryType": "point",
+            "labelerLogin": "akoublis",
+            "createdAt": "2022-09-24T18:57:58.517Z",
+            "updatedAt": "2022-09-24T18:57:58.517Z",
+            "tags": [],
+            "classTitle": "Top",
+            "points": {
+                "exterior": [
+                    [
+                        14,
+                        52
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}

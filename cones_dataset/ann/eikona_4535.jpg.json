@@ -1,0 +1,150 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 64,
+        "width": 48
+    },
+    "objects": [
+        {
+            "id": 1487014539,
+            "classId": 10374047,
+            "description": "",
+            "geometryType": "point",
+            "labelerLogin": "akoublis",
+            "createdAt": "2023-12-02T12:34:13.709Z",
+            "updatedAt": "2023-12-02T12:34:13.709Z",
+            "tags": [],
+            "classTitle": "Top",
+            "points": {
+                "exterior": [
+                    [
+                        38,
+                        57
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "id": 1487014536,
+            "classId": 10374047,
+            "description": "",
+            "geometryType": "point",
+            "labelerLogin": "akoublis",
+            "createdAt": "2023-12-02T12:34:11.762Z",
+            "updatedAt": "2023-12-02T12:34:11.762Z",
+            "tags": [],
+            "classTitle": "Top",
+            "points": {
+                "exterior": [
+                    [
+                        35,
+                        38
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "id": 1487014534,
+            "classId": 10374047,
+            "description": "",
+            "geometryType": "point",
+            "labelerLogin": "akoublis",
+            "createdAt": "2023-12-02T12:34:10.555Z",
+            "updatedAt": "2023-12-02T12:34:10.555Z",
+            "tags": [],
+            "classTitle": "Top",
+            "points": {
+                "exterior": [
+                    [
+                        32,
+                        22
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "id": 1487014532,
+            "classId": 10374047,
+            "description": "",
+            "geometryType": "point",
+            "labelerLogin": "akoublis",
+            "createdAt": "2023-12-02T12:34:08.506Z",
+            "updatedAt": "2023-12-02T12:34:08.506Z",
+            "tags": [],
+            "classTitle": "Top",
+            "points": {
+                "exterior": [
+                    [
+                        25,
+                        6
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "id": 1487014527,
+            "classId": 10374047,
+            "description": "",
+            "geometryType": "point",
+            "labelerLogin": "akoublis",
+            "createdAt": "2023-12-02T12:33:59.854Z",
+            "updatedAt": "2023-12-02T12:34:05.297Z",
+            "tags": [],
+            "classTitle": "Top",
+            "points": {
+                "exterior": [
+                    [
+                        19,
+                        22
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "id": 1487014524,
+            "classId": 10374047,
+            "description": "",
+            "geometryType": "point",
+            "labelerLogin": "akoublis",
+            "createdAt": "2023-12-02T12:33:56.622Z",
+            "updatedAt": "2023-12-02T12:33:56.622Z",
+            "tags": [],
+            "classTitle": "Top",
+            "points": {
+                "exterior": [
+                    [
+                        15,
+                        39
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "id": 1487014522,
+            "classId": 10374047,
+            "description": "",
+            "geometryType": "point",
+            "labelerLogin": "akoublis",
+            "createdAt": "2023-12-02T12:33:55.178Z",
+            "updatedAt": "2023-12-02T12:33:55.178Z",
+            "tags": [],
+            "classTitle": "Top",
+            "points": {
+                "exterior": [
+                    [
+                        12,
+                        57
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}

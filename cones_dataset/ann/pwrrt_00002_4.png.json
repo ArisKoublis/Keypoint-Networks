@@ -1,0 +1,160 @@
+{
+    "description": "",
+    "tags": [
+        {
+            "id": 131557085,
+            "tagId": 30434435,
+            "name": "bad quality",
+            "value": null,
+            "labelerLogin": "Peter",
+            "createdAt": "2022-09-25T11:40:07.009Z",
+            "updatedAt": "2022-09-25T11:40:07.009Z"
+        }
+    ],
+    "size": {
+        "height": 64,
+        "width": 48
+    },
+    "objects": [
+        {
+            "id": 1037293763,
+            "classId": 10374605,
+            "description": "",
+            "geometryType": "point",
+            "labelerLogin": "Peter",
+            "createdAt": "2022-09-25T11:40:06.233Z",
+            "updatedAt": "2022-09-25T11:40:06.233Z",
+            "tags": [],
+            "classTitle": "Top",
+            "points": {
+                "exterior": [
+                    [
+                        31,
+                        49
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "id": 1037293760,
+            "classId": 10374605,
+            "description": "",
+            "geometryType": "point",
+            "labelerLogin": "Peter",
+            "createdAt": "2022-09-25T11:40:05.131Z",
+            "updatedAt": "2022-09-25T11:40:05.131Z",
+            "tags": [],
+            "classTitle": "Top",
+            "points": {
+                "exterior": [
+                    [
+                        29,
+                        34
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "id": 1037293759,
+            "classId": 10374605,
+            "description": "",
+            "geometryType": "point",
+            "labelerLogin": "Peter",
+            "createdAt": "2022-09-25T11:40:03.990Z",
+            "updatedAt": "2022-09-25T11:40:03.990Z",
+            "tags": [],
+            "classTitle": "Top",
+            "points": {
+                "exterior": [
+                    [
+                        29,
+                        22
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "id": 1037293757,
+            "classId": 10374605,
+            "description": "",
+            "geometryType": "point",
+            "labelerLogin": "Peter",
+            "createdAt": "2022-09-25T11:40:02.689Z",
+            "updatedAt": "2022-09-25T11:40:02.689Z",
+            "tags": [],
+            "classTitle": "Top",
+            "points": {
+                "exterior": [
+                    [
+                        24,
+                        7
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "id": 1037293754,
+            "classId": 10374605,
+            "description": "",
+            "geometryType": "point",
+            "labelerLogin": "Peter",
+            "createdAt": "2022-09-25T11:40:00.885Z",
+            "updatedAt": "2022-09-25T11:40:00.885Z",
+            "tags": [],
+            "classTitle": "Top",
+            "points": {
+                "exterior": [
+                    [
+                        20,
+                        21
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "id": 1037293753,
+            "classId": 10374605,
+            "description": "",
+            "geometryType": "point",
+            "labelerLogin": "Peter",
+            "createdAt": "2022-09-25T11:39:59.840Z",
+            "updatedAt": "2022-09-25T11:39:59.840Z",
+            "tags": [],
+            "classTitle": "Top",
+            "points": {
+                "exterior": [
+                    [
+                        19,
+                        34
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "id": 1037293751,
+            "classId": 10374605,
+            "description": "",
+            "geometryType": "point",
+            "labelerLogin": "Peter",
+            "createdAt": "2022-09-25T11:39:58.490Z",
+            "updatedAt": "2022-09-25T11:39:58.490Z",
+            "tags": [],
+            "classTitle": "Top",
+            "points": {
+                "exterior": [
+                    [
+                        16,
+                        48
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}

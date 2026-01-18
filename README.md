@@ -26,7 +26,6 @@ To address these issues, **Gaussian heatmaps** are used as training targets:
 ### U-Net
 **U-Net** is an encoder–decoder architecture designed for dense, pixel-wise prediction tasks. The encoder captures semantic context through downsampling, while the decoder restores spatial resolution. Skip connections pass fine-grained spatial details from the encoder to the decoder, enabling precise localization while maintaining global context. This structure makes U-Net particularly effective for segmentation and keypoint heatmap prediction.
 
-### Comparison
 Although U-Net has a larger **receptive field**—meaning each output pixel can be influenced by a larger portion of the input image (approximately **30×30 pixels**)—compared to ResNet’s **15×15**, ResNet consistently performs better in this task. This suggests that, for small images and lightweight models, a very large receptive field is not always necessary. ResNet’s residual connections and efficient feature reuse allow it to localize keypoints more accurately despite its smaller receptive field.
 
 ![ResNet vs U-Net](readme_imgs/ResNet_base_vs_UNet_base.png)
