@@ -1,7 +1,7 @@
 # Keypoint-Networks
 
 ## Introduction
-Neural networks are commonly used in Formula Student to detect cone keypoints for improved distance estimation (see: [FSOCO paper](https://arxiv.org/abs/2007.13971)).
+Neural networks are commonly used in Formula Student to detect cone keypoints for improved distance estimation (see: [RektNet paper](https://arxiv.org/abs/2007.13971)).
 
 This repository explores lightweight neural network architectures for keypoint heatmap prediction. I systematically evaluate the impact of design choices—including network architecture, optimizers, learning rates, batch size, normalization strategies, and output activations—while keeping models small enough for real-time embedded systems (~80 KB memory footprint).
 
